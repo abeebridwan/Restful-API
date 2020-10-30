@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
+//Routes
+const postsRoutes = require('./routes/posts');
+
 
 const MONGO_URL = process.env.MONGO_URL_TEST;
 const options = {
@@ -14,6 +17,8 @@ const options = {
 };
 
 //middleware
+app.use('/posts', postsRoutes)
+
 app.use('/', (res, req, next) => {
  console.log("This is a middleware")
  next()
