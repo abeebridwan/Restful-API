@@ -1,6 +1,7 @@
 const express = require("express");  
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser'); 
 
 require('dotenv').config();
 
@@ -17,6 +18,9 @@ const options = {
 };
 
 //middleware
+
+app.use(bodyParser.json());
+
 app.use('/posts', postsRoutes)
 
 app.use('/', (res, req, next) => {
