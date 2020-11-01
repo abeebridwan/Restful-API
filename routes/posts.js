@@ -1,4 +1,5 @@
 const express = require("express");  
+const { findById } = require("../model/Post");
 const router = express.Router();
 const Post = require('../model/Post');
 
@@ -10,11 +11,6 @@ router.get('/', async (req, res) => {
     } catch (err) {
         res.json({message: err});
     } 
-});
-
-// get specific page
-router.get('/specific', (req, res,) => {
-    res.send('we are on specific')
 });
 
 // submit a post
@@ -31,5 +27,15 @@ router.post('/', async (req,res) => {
         res.json({message: err});
     } 
 }); 
+
+// get specific page
+router.get('/:postID', async (req, res,) => {    
+    try{
+        const post = await Post.findById(req.params.postID);
+        res.json(post);
+    } catch (err) {
+        res.json({message: err});
+    } 
+});
 
 module.exports = router;
